@@ -1,0 +1,188 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://scenes/Stage.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Main.gd" type="Script" id=2]
+[ext_resource path="res://sfx/009_long.ogg" type="AudioStream" id=3]
+[ext_resource path="res://themes/CryoJelly.theme" type="Theme" id=4]
+[ext_resource path="res://scenes/Pablarales.tscn" type="PackedScene" id=5]
+[ext_resource path="res://models/anim/pablarales_talk_01/frame0002.png" type="Texture" id=6]
+[ext_resource path="res://models/anim/pablarales_talk_01/frame0004.png" type="Texture" id=7]
+[ext_resource path="res://models/anim/pablarales_talk_01/frame0005.png" type="Texture" id=8]
+[ext_resource path="res://models/anim/pablarales_talk_01/frame0006.png" type="Texture" id=9]
+[ext_resource path="res://models/anim/pablarales_talk_01/frame0003.png" type="Texture" id=10]
+[ext_resource path="res://models/anim/pablarales_talk_01/frame0000.png" type="Texture" id=11]
+[ext_resource path="res://models/anim/pablarales_talk_01/frame0001.png" type="Texture" id=12]
+[ext_resource path="res://sfx/007.wav" type="AudioStream" id=13]
+[ext_resource path="res://models/anim/pablarales_angry_01/frame0005.png" type="Texture" id=14]
+[ext_resource path="res://models/anim/pablarales_angry_01/frame0001.png" type="Texture" id=15]
+[ext_resource path="res://models/anim/pablarales_angry_01/frame0000.png" type="Texture" id=16]
+[ext_resource path="res://models/anim/pablarales_angry_01/frame0006.png" type="Texture" id=17]
+[ext_resource path="res://models/anim/pablarales_angry_01/frame0002.png" type="Texture" id=18]
+[ext_resource path="res://models/anim/pablarales_angry_01/frame0004.png" type="Texture" id=19]
+[ext_resource path="res://models/anim/pablarales_angry_01/frame0003.png" type="Texture" id=20]
+[ext_resource path="res://models/anim/pablarales_livid_01/frame0001.png" type="Texture" id=21]
+[ext_resource path="res://models/anim/pablarales_livid_01/frame0003.png" type="Texture" id=22]
+[ext_resource path="res://models/anim/pablarales_livid_01/frame0000.png" type="Texture" id=23]
+[ext_resource path="res://models/anim/pablarales_livid_01/frame0002.png" type="Texture" id=24]
+[ext_resource path="res://models/anim/pablarales_livid_01/frame0004.png" type="Texture" id=25]
+[ext_resource path="res://models/anim/pablarales_livid_01/frame0005.png" type="Texture" id=26]
+[ext_resource path="res://models/anim/pablarales_livid_01/frame0006.png" type="Texture" id=27]
+[ext_resource path="res://gfx/dialog_indicator.png" type="Texture" id=28]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+albedo_color = Color( 0.643137, 0.490196, 0.490196, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "normal",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ) ],
+"loop": true,
+"name": "livid",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 15 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 14 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "angry",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=4]
+resource_name = "tilthead"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pablarales_face:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -37.312, 0 ), Vector3( 0, -20, 0 ), Vector3( 0, -37.312, 0 ) ]
+}
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_vertical_guides_": [ -602.689 ]
+}
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.666544, 2.55231, 15.1587 )
+fov = 60.0
+near = 0.1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -14.136
+autoplay = true
+
+[node name="Stage" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.41694, 0.0213852, -3.14795 )
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewsStrip" type="ColorRect" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 30 )
+color = Color( 0.0823529, 0.309804, 0.752941, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogBox" type="VBoxContainer" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 68.0
+margin_top = 40.0
+margin_right = -20.0
+margin_bottom = -300.0
+grow_horizontal = 0
+rect_min_size = Vector2( 500, 0 )
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogText" type="Label" parent="UI/DialogBox"]
+margin_right = 500.0
+margin_bottom = 150.0
+theme = ExtResource( 4 )
+text = "testing text for the game and trying interface layout"
+autowrap = true
+
+[node name="AngleInd" type="CenterContainer" parent="UI"]
+anchor_bottom = 1.0
+margin_left = 40.0
+rect_min_size = Vector2( 300, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/AngleInd"]
+margin_top = 349.0
+margin_right = 300.0
+margin_bottom = 419.0
+rect_min_size = Vector2( 300, 70 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="AngleTextLabel" type="Label" parent="UI/AngleInd/ColorRect"]
+margin_left = 34.0
+margin_top = 13.0
+margin_right = 265.0
+margin_bottom = 37.0
+theme = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "ANGLE IND"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightFakePlane" type="MeshInstance" parent="."]
+transform = Transform( 2.65432e-13, 1.62921e-07, 10, 10, -1.62921e-07, 0, 1.62921e-06, 1, -1.62921e-06, 15.8421, 2.9938, 0.0806885 )
+cast_shadow = 0
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="pablarales" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.999391, -0.0348995, 0, 0.0348782, 0.998781, -0.0348995, 0.00121797, 0.0348782, 0.999391, 10.9352, 4.41226, 3.17108 )
+
+[node name="pablarales_face" type="AnimatedSprite3D" parent="pablarales"]
+transform = Transform( 0.254511, 0, -0.19397, 0, 0.32, 0, 0.19397, 0, 0.254511, -2.64795, -0.26937, 1.38289 )
+frames = SubResource( 3 )
+animation = "livid"
+
+[node name="Voice" type="AudioStreamPlayer" parent="pablarales"]
+stream = ExtResource( 13 )
+volume_db = -30.291
+pitch_scale = 2.16
+
+[node name="headtilt" type="AnimationPlayer" parent="pablarales"]
+anims/tilthead = SubResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 7.70632, 4.70632, 3 )
+texture = ExtResource( 28 )
+[connection signal="nextText" from="." to="." method="_on_Main_nextText"]
